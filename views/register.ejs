@@ -1,0 +1,12 @@
+<% include header.ejs %>
+
+<h2>Please fill out the registration form</h2>
+<form METHOD="post" action="users/add">
+    Choose your Username:<input name="username" type="text">
+    <p>Choose your Password:<input name="password" type="text"></p>
+    <button type="submit">Register</button>
+</br>
+    Already registered?<button type ="submit" formaction="/login">Login</button>
+</form>
+
+<% include footer.ejs %>

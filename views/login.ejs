@@ -1,0 +1,11 @@
+<% include header.ejs %>
+
+<h2>Give your credentials to login</h2>
+<form METHOD="post" action="/user/find">
+    Username:<input name="username" type="text">
+    <p>Password:<input name="password" type="text"></p>
+    <button type="submit">Login</button>
+</br> Not registered yet? <button type ="submit" formaction="/register">Register</button>
+</form>
+
+<% include footer.ejs %>
