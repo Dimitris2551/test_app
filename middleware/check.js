@@ -6,7 +6,7 @@ const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
 const userModel = require('../models/userModel')
 
-const user = newUserModel.user;
+const user = new userModel().user;
 
 exports.isfound = function(req) {
     let username = req.body.username;
