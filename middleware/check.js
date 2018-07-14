@@ -8,18 +8,27 @@ const userModel = require('../models/userModel')
 
 const user = new userModel().user;
 
-exports.canRegister = function(req, res) {
+exports.checkRegistration = function(req, res, next) {
     let username = req.body.username;
     if (username) {
         user.findOne({username:username}, (err, doc) => {
             if (!doc) {
-                console.log("Did not find user. login invalid");
+                console.log("Did not find user. Registration possible");
+                //maybe we need an if(req.body.password)
+                req.canRegister = true;
+                next();
             }
             else {
                 console.log("user found\n" + doc);
-                return true;
+                req.CanRegister = false;
+                next();
             }
         });
+    }
+    else
+    {
+        req.canRegister = false;
+        next();
     }
 
 }

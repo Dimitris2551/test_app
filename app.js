@@ -18,17 +18,20 @@ db.once('open', function() {
 
 
 let app = express();
+
 //app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 //app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
+app.use(check.checkRegistration);
+
 app.post('/users/add', function(req, res) {
     console.log("form submited");
     let username = req.body.username;
-    let password = req.body.username;
-    console.log("user isfound:"+check.canRegister(req));
+    let password = req.body.password;
+    console.log("user canRegister:"+req.canRegister);
     check.registerIfOk(username, password);
     res.redirect('/register');
 });
