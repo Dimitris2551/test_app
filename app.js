@@ -15,6 +15,8 @@ db.once('open', function() {
     console.log("Database connected...")
 });
 
+
+
 let app = express();
 //app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
@@ -26,7 +28,7 @@ app.post('/users/add', function(req, res) {
     console.log("form submited");
     let username = req.body.username;
     let password = req.body.username;
-
+    console.log("user isfound:"+check.canRegister(req));
     check.registerIfOk(username, password);
     res.redirect('/register');
 });
@@ -37,6 +39,7 @@ app.all("/register", (req, res)=> {
 
 
 app.all("/login", (req, res)=> {
+
     res.render('login');
 });
 

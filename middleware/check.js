@@ -8,26 +8,18 @@ const userModel = require('../models/userModel')
 
 const user = new userModel().user;
 
-exports.isfound = function(req) {
+exports.canRegister = function(req, res) {
     let username = req.body.username;
-    let password = req.body.password;
-    console.log(usernameCurr);
-    if (usernameCurr)
-    {
-        user.findOne({username}, (err, doc) => {
-            if (!doc)
-            {
+    if (username) {
+        user.findOne({username:username}, (err, doc) => {
+            if (!doc) {
                 console.log("Did not find user. login invalid");
             }
-            else
-            {
-                console.log("user credentials valid login can occur\n" + doc);
+            else {
+                console.log("user found\n" + doc);
+                return true;
             }
         });
-    }
-    else
-    {
-        console.log("field is empty");
     }
 
 }
