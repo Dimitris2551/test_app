@@ -10,12 +10,16 @@ class UserController {
         this.app.post(`${baseApiUrl}/user/find`, this.userFind.bind(this));
     }
 
-    userFind(req, res) {
+
+    userFind(req, res){
         // find user and login if you find him
-        check.loginIfOk(req);
+        //check.loginIfOk(req);
         //res.render('login');
+        console.log("canLogin: "+req.canLogin);
         res.redirect('/login');
     }
+
 }
 
 module.exports = UserController;
+

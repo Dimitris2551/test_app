@@ -13,7 +13,7 @@ class userModel {
     }
 
         exists() {
-
+            
         }
 }
 

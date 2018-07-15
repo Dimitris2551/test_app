@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const check = require('./middleware/check');
 const userModel = require('./models/Models');
 const { userController } =  require('./controlers/Controllers');
+const crypto = require('crypto');
 
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
@@ -25,16 +26,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
-app.use(check.checkRegistration);
 
-app.post('/users/add', function(req, res) {
-    console.log("form submited");
-    let username = req.body.username;
-    let password = req.body.password;
-    console.log("user canRegister:"+req.canRegister);
-    check.registerIfOk(username, password);
-    res.redirect('/register');
-});
+
 
 app.all("/register", (req, res)=> {
     res.render('register');
@@ -46,7 +39,7 @@ app.all("/login", (req, res)=> {
     res.render('login');
 });
 
-new userController('', app);
+
 
 app.get('/', (req, res) =>{
     //res.send("Hi good to have you here");
@@ -59,5 +52,18 @@ app.get('/', (req, res) =>{
 })
 
 
+app.use(check.checkRegistration);
+app.use(check.checkLogin);
+
+new userController('', app);
+
+app.use(check.passHash);
+app.use(check.register);
+
+app.post('/users/add', function(req, res) {
+    console.log("form submited");
+    console.log("user canRegister:"+req.canRegister);
+    res.redirect('/register');
+});
 
 app.listen(8080);
