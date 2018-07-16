@@ -12,10 +12,18 @@ const user = theUserModel.user;
 const passwordHash = require('password-hash');
 
 exports.passHash = function(req, res, next) {
-    console.log("first"+req.body.password);
-    req.body.password = passwordHash.generate(req.body.password);
-    console.log("first"+req.body.password);
-    next();
+    if(req.body.password)
+    {
+        console.log("before" + req.body.password);
+        req.body.password = passwordHash.generate(req.body.password);
+        console.log("after" + req.body.password);
+        next();
+    }
+    else
+    {
+        console.log("password field empty");
+        next('route');
+    }
 }
 
 exports.checkRegistration = function(req, res, next) {
@@ -23,7 +31,7 @@ exports.checkRegistration = function(req, res, next) {
     if (username) {
         let newUser = new theUserModel.user;
         user.findOne({username:username}, (err, doc) => {
-            if (!doc) {
+            if (!doc && req.body.password) {
                 console.log("Did not find user. Registration possible");
                 //maybe we need an if(req.body.password)
                 req.canRegister = true;
@@ -64,7 +72,7 @@ exports.register = function(req, res, next) {
     }
     else
     {
-        console.log("username already exists\n" +req.body.username);
+        console.log("registration impossible\n" +req.body.username);
         next();
     }
 }
@@ -102,7 +110,7 @@ exports.checkLogin = function(req, res, next) {
     }
     else
     {
-        console.log("username field is empty");
+        console.log("username or password field is empty");
         next();
     }
 

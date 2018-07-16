@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="776274c4-6f27-4697-9604-805b3b8dcc3e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/check.js" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/check.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +18,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
+            <state relative-caret-position="302">
+              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
@@ -26,8 +27,26 @@
       <file leaf-file-name="check.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/middleware/check.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-750">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="135">
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/register.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="1" selection-start-line="1" selection-end-line="1" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/login.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="30" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -72,9 +91,7 @@
         <option value="$PROJECT_DIR$/other.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/Welcome.ejs" />
-        <option value="$PROJECT_DIR$/views/register.ejs" />
         <option value="$PROJECT_DIR$/views/Welcome.ejs" />
-        <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/user.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/middleware/checks.js" />
@@ -88,6 +105,8 @@
         <option value="$PROJECT_DIR$/services/register.js" />
         <option value="$PROJECT_DIR$/controlers/UserController.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/views/register.ejs" />
+        <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/middleware/check.js" />
       </list>
     </option>
@@ -261,12 +280,12 @@
       <workItem from="1531658146075" duration="4146000" />
       <workItem from="1531668799094" duration="12672000" />
       <workItem from="1531722573915" duration="307000" />
-      <workItem from="1531723618117" duration="1119000" />
+      <workItem from="1531723618117" duration="6094000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102759000" />
+    <option name="totallyTimeSpent" value="107734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="732" extended-state="6" />
@@ -571,20 +590,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/register.js" />
-    <entry file="file://$PROJECT_DIR$/views/register.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="75" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/login.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/userModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -599,17 +604,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/login.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="30" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
+        <state relative-caret-position="302">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/register.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="1" selection-start-line="1" selection-end-line="1" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/middleware/check.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-750">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="135">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
         </state>
       </provider>
     </entry>
