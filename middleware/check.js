@@ -80,7 +80,7 @@ exports.checkLogin = function(req, res, next) {
         user.findOne({username:usernameCurr}, (err, doc) => {
             if (!doc)
             {
-                console.log("Username and password combination incorrect. login invalid"+req.body.password+"end");
+                console.log("user not found");
                 next();
             }
             else
@@ -89,6 +89,11 @@ exports.checkLogin = function(req, res, next) {
                 {
                     console.log("user credentials valid login can occur\n" + doc);
                     req.canLogin = true;
+                    next();
+                }
+                else
+                {
+                    console.log("Username and password combination incorrect. login invalid");
                     next();
                 }
             }
@@ -102,7 +107,7 @@ exports.checkLogin = function(req, res, next) {
     }
 
 }
-
+/*
 exports.registerIfOk = function(usernameCurr, password){
     console.log(usernameCurr);
     if (usernameCurr)
@@ -160,3 +165,4 @@ exports.loginIfOk = function loginIfOk(req) {
     }
 
 }
+*/
