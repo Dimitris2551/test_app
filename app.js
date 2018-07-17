@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const check = require('./middleware/check');
 const userModel = require('./models/Models');
 const { userController } =  require('./controlers/Controllers');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
@@ -52,11 +52,12 @@ app.get('/', (req, res) =>{
 })
 
 
+app.use(check.contentType);
 app.use(check.checkRegistration);
 app.use(check.checkLogin);
+//app.use(check.login);
 
 new userController('', app);
-
 app.use(check.passHash);
 app.use(check.register);
 

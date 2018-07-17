@@ -10,7 +10,6 @@ class UserController {
         this.app.post(`${baseApiUrl}/user/find`, this.userFind.bind(this));
     }
 
-
     userFind(req, res){
         // find user and login if you find him
         //check.loginIfOk(req);

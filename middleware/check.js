@@ -4,12 +4,19 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
-const userModel = require('../models/userModel')
+const userModel = require('../models/userModel');
+const jwt = require('jsonwebtoken');
 
 const theUserModel = new userModel();
 const user = theUserModel.user;
 
 const passwordHash = require('password-hash');
+const secret = "9876";
+
+exports.contentType = function(req, res, next) {
+  res.header('Content-Type', 'application/json');
+  next();
+};
 
 exports.passHash = function(req, res, next) {
     if(req.body.password)
@@ -113,6 +120,41 @@ exports.checkLogin = function(req, res, next) {
         console.log("username or password field is empty");
         next();
     }
+}
+
+exports.login = function(req, res, next) {
+    let token = req.headers['x-access-token'];
+
+    console.log("JWT : "+ token);
+    /*
+    if (!token)
+    {
+        return res.status(401).send({ auth: false, message: 'No token provided.' });
+    }
+    */
+    jwt.verify(token, secret, function(err, decoded) {
+        if (err) {
+            if (req.canLogin) {
+                // create a token
+                let token = jwt.sign({username: req.body.username}, secret, {
+                    expiresIn: 86400 // expires in 24 hours
+                });
+                console.log("JWT : "+ token);
+                //res.render('login', {token});
+                res.status(200).json({token});
+                res.end();
+                next();
+            }
+            else
+            {
+                res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
+                next();
+            }
+        }
+        res.status(200).send(decoded);
+    });
+    //res.status(200).send(decoded);
+    next();
 
 }
 /*
