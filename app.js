@@ -23,8 +23,8 @@ let app = express();
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({extended:false}));
 //app.use(express.static(path.join(__dirname, 'public')));
-//app.set('view engine', 'ejs');
-//app.set('views', path.join(__dirname,'views'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname,'views'));
 
 
 
@@ -52,6 +52,9 @@ app.use('/user/find',check.contentType);
 app.use('/user/find',check.checkLogin);
 app.use('/user/find',check.login);
 
+app.get('/user/find',check.contentType);
+app.get('/user/find',check.checkLogin);
+app.get('/user/find',check.login);
 
 
 app.post('/user/add',check.checkRegistration);

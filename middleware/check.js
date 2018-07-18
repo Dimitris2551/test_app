@@ -130,7 +130,7 @@ exports.checkLogin = function(req, res, next) {
 
 exports.login = function(req, res, next) {
     let token = req.headers['x-access-token'];
-
+    req.auth = false;
     console.log("JWT : "+ token);
     /*
     if (!token)
@@ -139,8 +139,10 @@ exports.login = function(req, res, next) {
     }
     */
     jwt.verify(token, secret, function(err, decoded) {
-        if (err) {
-            if (req.canLogin) {
+        if (err)
+        {
+            if (req.canLogin)
+            {
                 // create a token
                 let token = jwt.sign({username: req.query.username}, secret, {
                     expiresIn: 86400 // expires in 24 hours
@@ -152,16 +154,18 @@ exports.login = function(req, res, next) {
             }
             else
             {
-                res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
+                res.status(500).send({auth:req.auth , message: 'Failed to authenticate token and no valid credentials were given.'});
                 next();
             }
         }
-        res.status(200).send(decoded);
+        else
+        {
+            req.auth = true;
+            res.status(200).json({auth:req.auth, message:'already logged in'});
+        }
     });
-    //res.status(200).send(decoded);
-    next();
-
 }
+
 /*
 exports.registerIfOk = function(usernameCurr, password){
     console.log(usernameCurr);

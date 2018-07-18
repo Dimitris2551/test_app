@@ -1,4 +1,3 @@
-const check = require('../middleware/check');
 
 class UserController {
     constructor (baseApiUrl, router) {
@@ -7,8 +6,10 @@ class UserController {
     }
 
     setup(baseApiUrl) {
+
         this.router.post(`${baseApiUrl}/user/find`, this.userFind.bind(this));
         this.router.post(`${baseApiUrl}/user/add`, this.userAdd.bind(this));
+        this.router.get(`${baseApiUrl}/secret`, this.getSecret.bind(this));
     }
 
     userFind(req, res){
@@ -27,6 +28,17 @@ class UserController {
         res.status(200).json({registered: req.registered});
         //res.redirect('/register');
         //res.end();
+    }
+    getSecret(req, res){
+        console.log("in getSecret");
+        if(req.auth)
+        {
+            res.json({secret: "I appreciate you being here"});
+        }
+        else
+        {
+            res.json({auth: req.auth, message: "Can't really show you the secret. you need to be logged in for that"});
+        }
     }
 
 }
