@@ -1,13 +1,13 @@
 const check = require('../middleware/check');
 
 class UserController {
-    constructor (baseApiUrl, app) {
-        this.app = app;
+    constructor (baseApiUrl, router) {
+        this.router = router;
         this.setup(baseApiUrl);
     }
 
     setup(baseApiUrl) {
-        this.app.post(`${baseApiUrl}/user/find`, this.userFind.bind(this));
+        this.router.post(`${baseApiUrl}/user/find`, this.userFind.bind(this));
     }
 
     userFind(req, res){
@@ -15,7 +15,8 @@ class UserController {
         //check.loginIfOk(req);
         //res.render('login');
         console.log("canLogin: "+req.canLogin);
-        res.redirect('/login');
+        //res.redirect('/login');
+        res.end();
     }
 
 }

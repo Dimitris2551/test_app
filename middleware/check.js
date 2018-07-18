@@ -19,11 +19,12 @@ exports.contentType = function(req, res, next) {
 };
 
 exports.passHash = function(req, res, next) {
-    if(req.body.password)
+    console.log("in passHash");
+    if(req.query.password)
     {
-        console.log("before" + req.body.password);
-        req.body.password = passwordHash.generate(req.body.password);
-        console.log("after" + req.body.password);
+        console.log("before" + req.query.password);
+        req.query.password = passwordHash.generate(req.query.password);
+        console.log("after" + req.query.password);
         next();
     }
     else
@@ -34,11 +35,13 @@ exports.passHash = function(req, res, next) {
 }
 
 exports.checkRegistration = function(req, res, next) {
-    let username = req.body.username;
+    let username = req.query.username;
+    console.log(req.query.username);
+    console.log(req.query.password);
     if (username) {
         let newUser = new theUserModel.user;
         user.findOne({username:username}, (err, doc) => {
-            if (!doc && req.body.password) {
+            if (!doc && req.query.password) {
                 console.log("Did not find user. Registration possible");
                 //maybe we need an if(req.body.password)
                 req.canRegister = true;
@@ -59,38 +62,41 @@ exports.checkRegistration = function(req, res, next) {
 }
 
 exports.register = function(req, res, next) {
+    req.registered = false;
     if (req.canRegister)
     {
         let newUser = new user();
-        newUser.username = req.body.username;
-        newUser.password = req.body.password;
+        newUser.username = req.query.username;
+        newUser.password = req.query.password;
         newUser.save((err)=> {
             if(!err)
             {
-                console.log("user:"+req.body.username+" registered");
+                console.log("user:"+req.query.username+" registered");
+                req.registered = true;
                 next();
             }
             else
             {
-                console.log("could not save user"+req.body.username);
+                console.log("could not save user"+req.query.username);
                 next();
             }
         });
     }
     else
     {
-        console.log("registration impossible\n" +req.body.username);
+        console.log("registration impossible\n" +req.query.username);
+        req.registered = true;
         next();
     }
 }
 
 exports.checkLogin = function(req, res, next) {
-    let usernameCurr = req.body.username;
-    let passwordCurr = req.body.password;
+    let usernameCurr = req.query.username;
+    let passwordCurr = req.query.password;
     console.log(passwordCurr);
     console.log(usernameCurr);
     req.canLogin = false;
-    if (usernameCurr && req.body.password)
+    if (usernameCurr && req.query.password)
     {
         user.findOne({username:usernameCurr}, (err, doc) => {
             if (!doc)
@@ -136,13 +142,12 @@ exports.login = function(req, res, next) {
         if (err) {
             if (req.canLogin) {
                 // create a token
-                let token = jwt.sign({username: req.body.username}, secret, {
+                let token = jwt.sign({username: req.query.username}, secret, {
                     expiresIn: 86400 // expires in 24 hours
                 });
                 console.log("JWT : "+ token);
                 //res.render('login', {token});
                 res.status(200).json({token});
-                res.end();
                 next();
             }
             else
@@ -194,7 +199,7 @@ exports.registerIfOk = function(usernameCurr, password){
 }
 
 exports.loginIfOk = function loginIfOk(req) {
-    let usernameCurr = req.body.username;
+    let usernameCurr = req.query.username;
     console.log(usernameCurr);
     if (usernameCurr)
     {
