@@ -8,6 +8,7 @@ class UserController {
 
     setup(baseApiUrl) {
         this.router.post(`${baseApiUrl}/user/find`, this.userFind.bind(this));
+        this.router.post(`${baseApiUrl}/user/add`, this.userAdd.bind(this));
     }
 
     userFind(req, res){
@@ -17,6 +18,15 @@ class UserController {
         console.log("canLogin: "+req.canLogin);
         //res.redirect('/login');
         res.end();
+    }
+
+    userAdd(req, res){
+        console.log("form submited");
+        console.log("user canRegister:"+req.canRegister);
+        console.log("registered: "+req.registered)
+        res.status(200).json({registered: req.registered});
+        //res.redirect('/register');
+        //res.end();
     }
 
 }

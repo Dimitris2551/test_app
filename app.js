@@ -52,19 +52,22 @@ app.use('/user/find',check.contentType);
 app.use('/user/find',check.checkLogin);
 app.use('/user/find',check.login);
 
-new userController('', app);
+
 
 app.post('/user/add',check.checkRegistration);
 app.post('/user/add',check.passHash);
 app.post('/user/add',check.register);
 
+new userController('', app);
+
+/*
 app.post('/user/add', function(req, res) {
     console.log("form submited");
     console.log("user canRegister:"+req.canRegister);
-    console.log("registerd: "+{registered: req.registered})
+    console.log("registered: "+req.registered)
     res.status(200).json({registered: req.registered});
     //res.redirect('/register');
     //res.end();
 });
-
+*/
 app.listen(8080);
