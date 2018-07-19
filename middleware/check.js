@@ -1,9 +1,3 @@
-const check = require('../middleware/check');
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const expressValidator = require('express-validator');
-const mongoose = require('mongoose');
 const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
@@ -32,14 +26,13 @@ exports.passHash = function(req, res, next) {
         console.log("password field empty");
         next('route');
     }
-}
+};
 
 exports.checkRegistration = function(req, res, next) {
     let username = req.query.username;
     console.log(req.query.username);
     console.log(req.query.password);
     if (username) {
-        let newUser = new theUserModel.user;
         user.findOne({username:username}, (err, doc) => {
             if (!doc && req.query.password) {
                 console.log("Did not find user. Registration possible");
@@ -59,7 +52,7 @@ exports.checkRegistration = function(req, res, next) {
         req.canRegister = false;
         next();
     }
-}
+};
 
 exports.register = function(req, res, next) {
     req.registered = false;
@@ -88,7 +81,7 @@ exports.register = function(req, res, next) {
         req.registered = true;
         next();
     }
-}
+};
 
 exports.checkLogin = function(req, res, next) {
     let usernameCurr = req.query.username;
@@ -126,7 +119,7 @@ exports.checkLogin = function(req, res, next) {
         console.log("username or password field is empty");
         next();
     }
-}
+};
 
 exports.login = function(req, res, next) {
     let token = req.headers['x-access-token'];
@@ -138,7 +131,7 @@ exports.login = function(req, res, next) {
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
     */
-    jwt.verify(token, secret, function(err, decoded) {
+    jwt.verify(token, secret, function(err/*, decoded*/) {
         if (err)
         {
             if (req.canLogin)
@@ -164,64 +157,4 @@ exports.login = function(req, res, next) {
             res.status(200).json({auth:req.auth, message:'already logged in'});
         }
     });
-}
-
-/*
-exports.registerIfOk = function(usernameCurr, password){
-    console.log(usernameCurr);
-    if (usernameCurr)
-    {
-        user.findOne({username: usernameCurr}, (err, doc) => {
-            if (!doc)
-            {
-                console.log("Did not find user so you can register");
-                let newUser = new user();
-                newUser.username = usernameCurr;
-                newUser.password = password;
-                newUser.save((err)=> {
-                    if(!err)
-                    {
-                        console.log("user:"+usernameCurr+" registered");
-                    }
-                    else
-                    {
-                        console.log("could not save user"+usernameCurr);
-                    }
-                });
-            }
-            else
-            {
-                console.log("username already exists\n" + doc);
-            }
-        });
-    }
-    else
-    {
-        console.log("field is empty");
-    }
-
-}
-
-exports.loginIfOk = function loginIfOk(req) {
-    let usernameCurr = req.query.username;
-    console.log(usernameCurr);
-    if (usernameCurr)
-    {
-        user.findOne({username: usernameCurr, password:req.body.password}, (err, doc) => {
-            if (!doc)
-            {
-                console.log("Username and password compination encorrect. login invalid");
-            }
-            else
-            {
-                console.log("user credentials valid login can occur\n" + doc);
-            }
-        });
-    }
-    else
-    {
-        console.log("field is empty");
-    }
-
-}
-*/
+};

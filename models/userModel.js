@@ -11,10 +11,6 @@ class userModel {
         });
         this.user = mongoose.model('user', this.userSchema);
     }
-
-        exists() {
-            
-        }
 }
 
 module.exports = userModel;

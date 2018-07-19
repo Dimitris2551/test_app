@@ -5,11 +5,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const check = require('./middleware/check');
-const userModel = require('./models/Models');
 const { userController, authController } =  require('./controlers/Controllers');
 
 mongoose.connect('mongodb://localhost/test');
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("Database connected...")

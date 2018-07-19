@@ -14,8 +14,6 @@ class UserController {
         console.log("user canRegister:"+req.canRegister);
         console.log("registered: "+req.registered)
         res.status(200).json({registered: req.registered});
-        //res.redirect('/register');
-        //res.end();
     }
 
 
