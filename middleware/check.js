@@ -124,12 +124,13 @@ exports.checkLogin = function(req, res, next) {
 exports.login = function(req, res, next) {
     let token = req.headers['x-access-token'];
     req.auth = false;
+    let thePath = req.originalUrl.split('?')[0];
     console.log("JWT : "+ token);
-
+    
     jwt.verify(token, secret, function(err/*, decoded*/) {
         if (err)
         {
-            if (req.canLogin)
+            if (req.canLogin && (thePath === '/user/find'))
             {
                 // create a token
                 let token = jwt.sign({username: req.query.username}, secret, {
@@ -142,14 +143,21 @@ exports.login = function(req, res, next) {
             }
             else
             {
-                res.status(500).send({auth:req.auth , message: 'Failed to authenticate token and no valid credentials were given.'});
+                if(thePath === '/user/find')
+                {
+                    res.status(500).json({auth:req.auth , message: 'Failed to authenticate token and no valid credentials were given.'});
+                }
                 next();
             }
         }
         else
         {
             req.auth = true;
-            //res.status(200).json({auth:req.auth, message:'already logged in'});
+            if(thePath === '/user/find')
+            {
+                res.status(200).json({auth: req.auth, message: 'already logged in'});
+            }
+            next();
         }
     });
 };
