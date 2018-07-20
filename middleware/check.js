@@ -29,6 +29,7 @@ exports.passHash = function(req, res, next) {
 };
 
 exports.checkRegistration = function(req, res, next) {
+    req.registered = false;
     let username = req.query.username;
     console.log(req.query.username);
     console.log(req.query.password);
@@ -43,6 +44,7 @@ exports.checkRegistration = function(req, res, next) {
             else {
                 console.log("user found\n" + doc);
                 req.canRegister = false;
+                req.registered = true;
                 next();
             }
         });
@@ -55,8 +57,7 @@ exports.checkRegistration = function(req, res, next) {
 };
 
 exports.register = function(req, res, next) {
-    req.registered = false;
-    if (req.canRegister)
+    if (req.canRegister && (!req.registered))
     {
         let newUser = new user();
         newUser.username = req.query.username;
@@ -78,7 +79,6 @@ exports.register = function(req, res, next) {
     else
     {
         console.log("registration impossible\n" +req.query.username);
-        req.registered = true;
         next();
     }
 };
@@ -125,12 +125,7 @@ exports.login = function(req, res, next) {
     let token = req.headers['x-access-token'];
     req.auth = false;
     console.log("JWT : "+ token);
-    /*
-    if (!token)
-    {
-        return res.status(401).send({ auth: false, message: 'No token provided.' });
-    }
-    */
+
     jwt.verify(token, secret, function(err/*, decoded*/) {
         if (err)
         {

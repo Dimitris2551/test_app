@@ -26,9 +26,9 @@ app.use('/user/find',check.contentType);
 app.use('/user/find',check.checkLogin);
 app.use('/user/find',check.login);
 
-app.get('/user/find',check.contentType);
-app.get('/user/find',check.checkLogin);
-app.get('/user/find',check.login);
+app.get('/secret',check.contentType);
+app.get('/secret',check.checkLogin);
+app.get('/secret',check.login);
 
 
 app.post('/user/add',check.checkRegistration);
