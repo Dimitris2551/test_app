@@ -149,7 +149,7 @@ exports.login = function(req, res, next) {
         else
         {
             req.auth = true;
-            res.status(200).json({auth:req.auth, message:'already logged in'});
+            //res.status(200).json({auth:req.auth, message:'already logged in'});
         }
     });
 };
