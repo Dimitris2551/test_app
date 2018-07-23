@@ -22,6 +22,8 @@ let app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
+app.use(check.enableCORS);
+
 app.use('/user/find',check.contentType);
 app.use('/user/find',check.checkLogin);
 app.use('/user/find',check.login);

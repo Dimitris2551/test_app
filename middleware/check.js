@@ -12,6 +12,12 @@ exports.contentType = function(req, res, next) {
   next();
 };
 
+exports.enableCORS = function(req, res, next){
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+};
+
 exports.passHash = function(req, res, next) {
     console.log("in passHash");
     if(req.query.password)
@@ -126,7 +132,7 @@ exports.login = function(req, res, next) {
     req.auth = false;
     let thePath = req.originalUrl.split('?')[0];
     console.log("JWT : "+ token);
-    
+
     jwt.verify(token, secret, function(err/*, decoded*/) {
         if (err)
         {
