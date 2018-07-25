@@ -14,7 +14,16 @@ exports.contentType = function(req, res, next) {
 
 exports.enableCORS = function(req, res, next){
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, OPTIONS');
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
     next();
 };
 
@@ -90,12 +99,13 @@ exports.register = function(req, res, next) {
 };
 
 exports.checkLogin = function(req, res, next) {
-    let usernameCurr = req.query.username;
-    let passwordCurr = req.query.password;
+    let usernameCurr = req.body.username;
+    let passwordCurr = req.body.password;
     console.log(passwordCurr);
     console.log(usernameCurr);
+
     req.canLogin = false;
-    if (usernameCurr && req.query.password)
+    if (usernameCurr && passwordCurr)
     {
         user.findOne({username:usernameCurr}, (err, doc) => {
             if (!doc)
@@ -151,7 +161,7 @@ exports.login = function(req, res, next) {
             {
                 if(thePath === '/user/find')
                 {
-                    res.status(500).json({auth:req.auth , message: 'Failed to authenticate token and no valid credentials were given.'});
+                    res.status(200).json({auth:req.auth , message: 'Failed to authenticate token and no valid credentials were given.'});
                 }
                 next();
             }
