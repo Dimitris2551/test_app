@@ -11,7 +11,7 @@ exports.contentType = function(req, res, next) {
   res.header('Content-Type', 'application/json');
   next();
 };
-
+/*
 exports.enableCORS = function(req, res, next){
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true");
@@ -26,14 +26,14 @@ exports.enableCORS = function(req, res, next){
     }
     next();
 };
-
+*/
 exports.passHash = function(req, res, next) {
     console.log("in passHash");
-    if(req.query.password)
+    if(req.body.password)
     {
-        console.log("before" + req.query.password);
-        req.query.password = passwordHash.generate(req.query.password);
-        console.log("after" + req.query.password);
+        console.log("before" + req.body.password);
+        req.body.password = passwordHash.generate(req.body.password);
+        console.log("after" + req.body.password);
         next();
     }
     else
@@ -45,12 +45,12 @@ exports.passHash = function(req, res, next) {
 
 exports.checkRegistration = function(req, res, next) {
     req.registered = false;
-    let username = req.query.username;
-    console.log(req.query.username);
-    console.log(req.query.password);
+    let username = req.body.username;
+    console.log(req.body.username);
+    console.log(req.body.password);
     if (username) {
         user.findOne({username:username}, (err, doc) => {
-            if (!doc && req.query.password) {
+            if (!doc && req.body.password) {
                 console.log("Did not find user. Registration possible");
                 //maybe we need an if(req.body.password)
                 req.canRegister = true;
@@ -75,25 +75,25 @@ exports.register = function(req, res, next) {
     if (req.canRegister && (!req.registered))
     {
         let newUser = new user();
-        newUser.username = req.query.username;
-        newUser.password = req.query.password;
+        newUser.username = req.body.username;
+        newUser.password = req.body.password;
         newUser.save((err)=> {
             if(!err)
             {
-                console.log("user:"+req.query.username+" registered");
+                console.log("user:"+req.body.username+" registered");
                 req.registered = true;
                 next();
             }
             else
             {
-                console.log("could not save user"+req.query.username);
+                console.log("could not save user"+req.body.username);
                 next();
             }
         });
     }
     else
     {
-        console.log("registration impossible\n" +req.query.username);
+        console.log("registration impossible\n" +req.body.username);
         next();
     }
 };
@@ -138,10 +138,10 @@ exports.checkLogin = function(req, res, next) {
 };
 
 exports.login = function(req, res, next) {
-    let token = req.headers['x-access-token'];
+    let token = req.body.token;
     req.auth = false;
     let thePath = req.originalUrl.split('?')[0];
-    console.log("JWT : "+ token);
+    console.log("JWT1 : "+ token);
 
     jwt.verify(token, secret, function(err/*, decoded*/) {
         if (err)
@@ -149,10 +149,10 @@ exports.login = function(req, res, next) {
             if (req.canLogin && (thePath === '/user/find'))
             {
                 // create a token
-                let token = jwt.sign({username: req.query.username}, secret, {
+                let token = jwt.sign({username: req.body.username}, secret, {
                     expiresIn: 86400 // expires in 24 hours
                 });
-                console.log("JWT : "+ token);
+                console.log("JWT2 : "+ token);
                 //res.render('login', {token});
                 res.status(200).json({token});
                 next();
