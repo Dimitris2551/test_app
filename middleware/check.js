@@ -139,13 +139,15 @@ exports.checkLogin = function(req, res, next) {
 
 exports.login = function(req, res, next) {
     let token;
-    if(req.body)
+    if(req.body.token)
     {
         token = req.body.token;
+        console.log("there is a body");
     }
     else
     {
         token = req.query.token;
+        console.log("there is not a body");
     }
 
     req.auth = false;
