@@ -7,7 +7,8 @@ class userModel {
         //const userSchema
         this.userSchema = schema({
             username: String,
-            password: String
+            password: String,
+            secret: String
         });
         this.user = mongoose.model('user', this.userSchema);
     }

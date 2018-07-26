@@ -58,6 +58,8 @@ exports.checkRegistration = function(req, res, next) {
             }
             else {
                 console.log("user found\n" + doc);
+                req.secret = doc.secret;
+                console.log(`the users secret is: ${req.secret}`)
                 req.canRegister = false;
                 req.registered = true;
                 next();
@@ -77,6 +79,7 @@ exports.register = function(req, res, next) {
         let newUser = new user();
         newUser.username = req.body.username;
         newUser.password = req.body.password;
+        newUser.secret = "";
         newUser.save((err)=> {
             if(!err)
             {
@@ -154,7 +157,7 @@ exports.login = function(req, res, next) {
     let thePath = req.originalUrl.split('?')[0];
     console.log("JWT1 : "+ token);
 
-    jwt.verify(token, secret, function(err/*, decoded*/) {
+    jwt.verify(token, secret, function(err, decoded) {
         if (err)
         {
             if (req.canLogin && (thePath === '/user/find'))
@@ -180,6 +183,8 @@ exports.login = function(req, res, next) {
         else
         {
             req.auth = true;
+            req.username = decoded.username;
+            console.log(`the decoded token contains the username: ${req.username}`);
             if(thePath === '/user/find')
             {
                 res.status(200).json({auth: req.auth, message: 'already logged in'});

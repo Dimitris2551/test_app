@@ -39,6 +39,7 @@ app.use('/user/find',check.login);
 
 app.get('/secret',check.checkLogin);
 app.get('/secret',check.login);
+app.get('/secret', check.checkRegistration);
 
 
 app.post('/user/add',check.checkRegistration);
