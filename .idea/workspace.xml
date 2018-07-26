@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="776274c4-6f27-4697-9604-805b3b8dcc3e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controlers/AuthController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controlers/AuthController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controlers/UserController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controlers/UserController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/check.js" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/check.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/userModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/userModel.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,26 +19,26 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
+            <state relative-caret-position="82">
               <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="check.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/middleware/check.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="61" column="64" selection-start-line="61" selection-start-column="64" selection-end-line="61" selection-end-column="64" />
+            <state relative-caret-position="247">
+              <caret line="60" column="40" lean-forward="true" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AuthController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controlers/AuthController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="113">
+              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -56,8 +55,8 @@
       <file leaf-file-name="UserController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controlers/UserController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="255">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -83,8 +82,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>req.auth</find>
       <find>username or</find>
+      <find>req.auth</find>
+      <find>req.secret</find>
+      <find>canLogin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -115,12 +116,12 @@
         <option value="$PROJECT_DIR$/views/header.ejs" />
         <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/controlers/Controllers.js" />
-        <option value="$PROJECT_DIR$/controlers/AuthController.js" />
         <option value="$PROJECT_DIR$/views/secret.ejs" />
-        <option value="$PROJECT_DIR$/controlers/UserController.js" />
         <option value="$PROJECT_DIR$/models/userModel.js" />
-        <option value="$PROJECT_DIR$/middleware/check.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/controlers/UserController.js" />
+        <option value="$PROJECT_DIR$/controlers/AuthController.js" />
+        <option value="$PROJECT_DIR$/middleware/check.js" />
       </list>
     </option>
   </component>
@@ -314,12 +315,12 @@
       <workItem from="1532500607194" duration="17766000" />
       <workItem from="1532524879331" duration="2312000" />
       <workItem from="1532537013247" duration="166000" />
-      <workItem from="1532589897875" duration="10050000" />
+      <workItem from="1532589897875" duration="14062000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201993000" />
+    <option name="totallyTimeSpent" value="206005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="732" extended-state="6" />
@@ -627,6 +628,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controlers/UserController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/userModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -634,31 +642,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controlers/UserController.js">
+    <entry file="file://$PROJECT_DIR$/controlers/AuthController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="113">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
+        <state relative-caret-position="82">
           <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/middleware/check.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="61" column="64" selection-start-line="61" selection-start-column="64" selection-end-line="61" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controlers/AuthController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="247">
+          <caret line="60" column="40" lean-forward="true" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
         </state>
       </provider>
     </entry>

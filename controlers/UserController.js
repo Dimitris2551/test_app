@@ -16,9 +16,6 @@ class UserController {
         res.status(200).json({registered: req.registered});
     }
 
-
-
-
 }
 
 module.exports = UserController;

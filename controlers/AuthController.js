@@ -19,9 +19,11 @@ class AuthController {
 
     getSecret(req, res){
         console.log("in getSecret");
+        console.log(`req.auth: ${req.auth}`);
+        console.log(`req.secret: ${req.secret}`);
         if(req.auth)
         {
-            res.json({secret: "I appreciate you being here"});
+            res.json({secret: req.secret});
         }
         else
         {

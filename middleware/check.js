@@ -58,6 +58,7 @@ exports.checkRegistration = function(req, res, next) {
             }
             else {
                 console.log("user found\n" + doc);
+                console.log(`doc.secret: ${doc.secret}`);
                 req.secret = doc.secret;
                 console.log(`the users secret is: ${req.secret}`)
                 req.canRegister = false;
@@ -79,7 +80,7 @@ exports.register = function(req, res, next) {
         let newUser = new user();
         newUser.username = req.body.username;
         newUser.password = req.body.password;
-        newUser.secret = "";
+        newUser.secret = req.body.secret;
         newUser.save((err)=> {
             if(!err)
             {
@@ -183,7 +184,8 @@ exports.login = function(req, res, next) {
         else
         {
             req.auth = true;
-            req.username = decoded.username;
+            console.log(`req.auth: ${req.auth}`);
+            req.body.username = decoded.username;
             console.log(`the decoded token contains the username: ${req.username}`);
             if(thePath === '/user/find')
             {
