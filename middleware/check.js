@@ -138,7 +138,16 @@ exports.checkLogin = function(req, res, next) {
 };
 
 exports.login = function(req, res, next) {
-    let token = req.body.token;
+    let token;
+    if(req.body)
+    {
+        token = req.body.token;
+    }
+    else
+    {
+        token = req.query.token;
+    }
+
     req.auth = false;
     let thePath = req.originalUrl.split('?')[0];
     console.log("JWT1 : "+ token);
