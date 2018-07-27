@@ -61,9 +61,9 @@ exports.checkRegistration = function(req, res, next) {
             }
             else {
                 console.log("user found\n" + doc);
-                console.log(`doc.secret: ${doc.secret}`);
-                req.secret = doc.secret;
-                console.log(`the users secret is: ${req.secret}`)
+                //console.log(`doc.secret: ${doc.secret}`);
+                //req.secret = doc.secret;
+                //console.log(`the users secret is: ${req.secret}`)
                 req.canRegister = false;
                 req.registered = true;
                 next();
@@ -198,3 +198,27 @@ exports.login = function(req, res, next) {
         }
     });
 };
+
+exports.getAllSecrets = function(req, res, next){
+    let username = req.body.username;
+    console.log(req.body.username);
+    console.log(req.body.password);
+    if (username) {
+        secret.find({username:username}, (err, docs) => {
+            if (!docs) {
+                req.secrets = {nothingFound:true};
+                next();
+            }
+            else {
+                req.secrets = {docs:docs};
+                console.log(`the users secret is: ${JSON.stringify(req.secrets.docs)}`);
+                next();
+            }
+        });
+    }
+    else
+    {
+        next();
+    }
+};
+

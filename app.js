@@ -39,7 +39,7 @@ app.use('/user/find',check.login);
 
 app.get('/secret',check.checkLogin);
 app.get('/secret',check.login);
-app.get('/secret', check.checkRegistration);
+app.get('/secret', check.getAllSecrets);
 
 
 app.post('/user/add',check.checkRegistration);
