@@ -1,11 +1,14 @@
-const userModel = require('../models/userModel');
+const {userModel , secretModel} = require('../models/Models');
 const jwt = require('jsonwebtoken');
 
 const theUserModel = new userModel();
 const user = theUserModel.user;
 
+const thesecretModel = new secretModel();
+const secret = thesecretModel.secret;
+
 const passwordHash = require('password-hash');
-const secret = "9876";
+const hashKey = "9876";
 
 exports.contentType = function(req, res, next) {
   res.header('Content-Type', 'application/json');
@@ -158,13 +161,13 @@ exports.login = function(req, res, next) {
     let thePath = req.originalUrl.split('?')[0];
     console.log("JWT1 : "+ token);
 
-    jwt.verify(token, secret, function(err, decoded) {
+    jwt.verify(token, hashKey, function(err, decoded) {
         if (err)
         {
             if (req.canLogin && (thePath === '/user/find'))
             {
                 // create a token
-                let token = jwt.sign({username: req.body.username}, secret, {
+                let token = jwt.sign({username: req.body.username}, hashKey, {
                     expiresIn: 86400 // expires in 24 hours
                 });
                 console.log("JWT2 : "+ token);
