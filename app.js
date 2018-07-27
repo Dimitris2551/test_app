@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
 app.use(cors);
-//app.options('*', cors);
+app.options('*', cors);
 /*
 app.options('*', cors());
 app.post('*', cors());
@@ -41,6 +41,9 @@ app.get('/secret',check.checkLogin);
 app.get('/secret',check.login);
 app.get('/secret', check.getAllSecrets);
 
+app.post('/secret/add',check.checkLogin);
+app.post('/secret/add',check.login);
+app.post('/secret/add',check.addSecret);
 
 app.post('/user/add',check.checkRegistration);
 app.post('/user/add',check.passHash);

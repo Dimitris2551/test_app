@@ -189,7 +189,8 @@ exports.login = function(req, res, next) {
             req.auth = true;
             console.log(`req.auth: ${req.auth}`);
             req.body.username = decoded.username;
-            console.log(`the decoded token contains the username: ${req.username}`);
+            console.log(`thePath: ${thePath}`)
+            console.log(`the decoded token contains the username: ${req.body.username}`);
             if(thePath === '/user/find')
             {
                 res.status(200).json({auth: req.auth, message: 'already logged in'});
@@ -222,3 +223,24 @@ exports.getAllSecrets = function(req, res, next){
     }
 };
 
+exports.addSecret = function(req, res, next) {
+    let newSecret = new secret();
+    req.added = false;
+    newSecret.username = req.body.username;
+    newSecret.title = req.body.title;
+    newSecret.secret = req.body.post;
+    console.log(req.body.username+req.body.title+req.body.post);
+    newSecret.save((err, updatedSecret) => {
+        if (!err) {
+            console.log("secret:" + req.body.title + " added");
+            console.log("updatedSecret: "+updatedSecret);
+            req.added = true;
+            next();
+        }
+        else {
+            console.log("could not save user" + req.body.username);
+            next();
+        }
+    });
+
+};
