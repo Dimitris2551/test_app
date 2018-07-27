@@ -169,7 +169,7 @@ exports.login = function(req, res, next) {
                 });
                 console.log("JWT2 : "+ token);
                 //res.render('login', {token});
-                res.status(200).json({token});
+                res.status(200).json({token, auth:true});
                 next();
             }
             else
