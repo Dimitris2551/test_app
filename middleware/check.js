@@ -211,7 +211,7 @@ exports.getAllSecrets = function(req, res, next){
                 next();
             }
             else {
-                req.secrets = {docs:docs};
+                req.secrets = {docs:docs.reverse()};
                 console.log(`the users secret is: ${JSON.stringify(req.secrets.docs)}`);
                 next();
             }
